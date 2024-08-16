@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.promineotech</groupId>
+    <artifactId>pet-store</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>pet-store</name>
+    <description>pet-store</description>
+    <url/>
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer/>
+    </developers>
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
+    <properties>
+        <java.version>21</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-bom</artifactId>
+            <version>2024.0.2</version>
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+
+<!--        b.     Select: Maven project, Java language, and the latest General Availability version of Spring Boot 3. This will be a Spring Boot version without parentheses following the version (like RC1, SNAPSHOT, etc.). So, "3.0.5" and not "3.0.6 (SNAPSHOT)".-->
+
+<!--        c.     Set "Group" to "com.promineotech" or to your own name separated by dots.-->
+
+<!--        d.     Set "Artifact" to "pet-store".-->
+
+<!--        e.     Set "Packaging" to "Jar" and "Java" to "17".-->
+
+<!--        f.      Add the following dependencies: web, jpa, mysql, and lombok.-->
+
+<!--        g.     Click "Explore" and then "Copy".-->
+
+<!--        h.     In Eclipse, paste the clipboard contents into pom.xml in the project root directory, replacing the contents of the file. Save the file.-->
+
+<!--        i.      Right-click on the project name, then select "Maven" / "Update project". Click OK. This is an important step. Otherwise, Eclipse may not recognize the changes made to the POM file.-->
