@@ -8,11 +8,14 @@ import pet.store.dao.PetStoreDao;
 
 import java.util.NoSuchElementException;
 
+@Service
 public class PetStoreService {
+
+    @Autowired
     private PetStoreDao petStoreDao;
 
     public PetStoreData savePetStore(PetStoreData petStoreData) {
-        PetStore petStore = findOrCreatePetStore(petStoreData.getId());
+        PetStore petStore = findOrCreatePetStore(petStoreData.getPetStoreId());
 
         copyPetStoreFields(petStore, petStoreData);
 
@@ -26,7 +29,7 @@ public class PetStoreService {
             return new PetStore();
         } else {
             return petStoreDao.findById(petStoreId).orElseThrow(() ->
-                new NoSuchElementException("Pet Store with Id " + petStoreId + " cannot be found!");
+                    new NoSuchElementException("Pet Store with Id " + petStoreId + " cannot be found!"));
         }
     }
 

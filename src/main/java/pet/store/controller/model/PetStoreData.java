@@ -1,64 +1,59 @@
 package pet.store.controller.model;
 
-import com.promineotech.petstore.entity.Customer;
 import com.promineotech.petstore.entity.PetStore;
-import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.promineotech.petstore.entity.Customer;
+import com.promineotech.petstore.entity.Employee;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
 public class PetStoreData {
-    public static class PetStore {
-        private Long id;
-        private String storeName;
-        private String storeAddress;
-        private Set<Customer> customers;
-        private Set<Employee> employees;
+    private Long petStoreId;
+    private String storeName;
+    private String storeAddress;
+    private Set<PetStoreCustomer> customers = new HashSet<>();
+    private Set<PetStoreEmployee> employees = new HashSet<>();
 
-        public PetStoreData(PetStore petStore) {
-            this.id = petStore.getId();
-            this.storeName = petStore.getStoreName();
-            this.storeAddress = petStore.getStoreAddress();
-            this.customers = petStore.getCustomers().stream()
-                    .map(PetStoreCustomer::new)
-                    .collect(Collectors.toSet());
-            this.employees = petStore.getEmployees().stream()
-                    .map(PetStoreEmployee::new)
-                    .collect(Collectors.toSet());
-        }
+    public PetStoreData(PetStore petStore) {
+        this.petStoreId = petStore.getId();
+        this.storeName = petStore.getStoreName();
+        this.storeAddress = petStore.getStoreAddress();
+        this.customers = petStore.getCustomers().stream()
+                .map(PetStoreCustomer::new)
+                .collect(Collectors.toSet());
+        this.employees = petStore.getEmployees().stream()
+                .map(PetStoreEmployee::new)
+                .collect(Collectors.toSet());
     }
 
-    public static class Customer {
-        private Long id;
-
+    @Data
+    @NoArgsConstructor
+    public static class PetStoreCustomer {
+        private Long customerId;
         private String customerEmail;
         private String customerName;
 
-        private Set<com.promineotech.petstore.entity.PetStore> petStores;
-
         public PetStoreCustomer(Customer customer) {
-            this.id = customer.getId();
+            this.customerId = customer.getId();
             this.customerEmail = customer.getCustomerEmail();
             this.customerName = customer.getCustomerName();
         }
     }
 
-    public static class Employee {
-        private Long id;
-
+    @Data
+    @NoArgsConstructor
+    public static class PetStoreEmployee {
+        private Long employeeId;
         private String employeeName;
         private String employeeRole;
 
-        private com.promineotech.petstore.entity.PetStore petStore;
-
         public PetStoreEmployee(Employee employee) {
-            this.id = employee.getId();
+            this.employeeId = employee.getId();
             this.employeeName = employee.getEmployeeName();
             this.employeeRole = employee.getEmployeeRole();
         }

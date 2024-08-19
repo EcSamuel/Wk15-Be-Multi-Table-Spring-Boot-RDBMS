@@ -3,5 +3,6 @@ package pet.store.dao;
 import com.promineotech.petstore.entity.PetStore;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public class PetStoreDao extends JpaRepository<PetStore, Long> {
+public interface PetStoreDao extends JpaRepository<PetStore, Long> {
+    // No need to add any methods here unless you need custom queries
 }
