@@ -1,10 +1,10 @@
-package pet.store.service;
+package com.promineotech.petstore.service;
 
+import com.promineotech.petstore.dao.PetStoreDao;
 import com.promineotech.petstore.entity.PetStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pet.store.controller.model.PetStoreData;
-import pet.store.dao.PetStoreDao;
+import com.promineotech.petstore.controller.model.PetStoreData;
 
 import java.util.NoSuchElementException;
 

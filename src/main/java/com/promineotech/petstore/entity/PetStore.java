@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.util.HashSet;
 import java.util.Set;
 
 // Mark this class as a JPA entity
@@ -16,8 +18,9 @@ public class PetStore {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Instance variables reflecting table columns
+    @Column// Instance variables reflecting table columns
     private String storeName;
+    @Column
     private String storeAddress;
 
     // Relationship with Customers
@@ -29,11 +32,11 @@ public class PetStore {
     )
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<Customer> customers;
+    private Set<Customer> customers = new HashSet<>();
 
     // Relationship with Employees
     @OneToMany(mappedBy = "petStore", cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<Employee> employees;
+    private Set<Employee> employees = new HashSet<>();
 }

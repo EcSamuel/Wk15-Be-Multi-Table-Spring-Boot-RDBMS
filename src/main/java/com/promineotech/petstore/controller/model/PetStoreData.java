@@ -1,4 +1,4 @@
-package pet.store.controller.model;
+package com.promineotech.petstore.controller.model;
 
 import com.promineotech.petstore.entity.PetStore;
 import lombok.Data;
@@ -23,12 +23,19 @@ public class PetStoreData {
         this.petStoreId = petStore.getId();
         this.storeName = petStore.getStoreName();
         this.storeAddress = petStore.getStoreAddress();
-        this.customers = petStore.getCustomers().stream()
-                .map(PetStoreCustomer::new)
-                .collect(Collectors.toSet());
-        this.employees = petStore.getEmployees().stream()
-                .map(PetStoreEmployee::new)
-                .collect(Collectors.toSet());
+//        this.customers = petStore.getCustomers().stream()
+//                .map(PetStoreCustomer::new)
+//                .collect(Collectors.toSet());
+//        this.employees = petStore.getEmployees().stream()
+//                .map(PetStoreEmployee::new)
+//                .collect(Collectors.toSet());
+        for (Customer customer : petStore.getCustomers()) {
+            customers.add(new PetStoreCustomer(customer));
+        }
+
+        for (Employee employee : petStore.getEmployees()) {
+            employees.add(new PetStoreEmployee(employee));
+        }
     }
 
     @Data
