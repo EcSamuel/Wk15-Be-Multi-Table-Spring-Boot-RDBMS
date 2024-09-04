@@ -28,5 +28,14 @@ public class PetStoreController {
         petStoreData.setPetStoreId(petStoreId);
         return petStoreService.savePetStore(petStoreData);
     }
+
+    @PostMapping("/{petStoreId}/employee")
+    @ResponseStatus(HttpStatus.CREATED)
+    public PetStoreEmployee addEmployee(@PathVariable Long petStoreId, @RequestBody PetStoreData petStoreData, @RequestBody PetStoreData.PetStoreEmployee petStoreEmployee) {
+        log.info("Received request to add employee to pet store: {}", petStoreId);
+        petStoreData.setPetStoreId(petStoreId);
+        return petStoreService.savePetStoreEmployee(petStoreId, petStoreEmployee);
+    }
+
 }
 

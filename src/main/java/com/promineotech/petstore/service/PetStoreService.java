@@ -37,4 +37,8 @@ public class PetStoreService {
         petStore.setStoreName(petStoreData.getStoreName());
         petStore.setStoreAddress(petStoreData.getStoreAddress());
     }
+
+    public void savePetStoreEmployee(Long petStoreId, PetStoreData.PetStoreEmployee petStoreEmployee) {
+
+    }
 }
