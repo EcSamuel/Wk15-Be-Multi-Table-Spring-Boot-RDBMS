@@ -5,9 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-// Mark this class as a JPA entity
 @Entity
-@Data // Lombok annotation for getters, setters, toString, etc.
+@Data// Lombok annotation for getters, setters, toString, etc.
 public class Employee {
 
     // Define the primary key with auto-generated value
@@ -16,7 +15,9 @@ public class Employee {
     private Long id;
 
     // Instance variables reflecting table columns
+    @Column(nullable = false)
     private String employeeName;
+    @Column
     private String employeeRole;
 
     // Relationship with PetStore

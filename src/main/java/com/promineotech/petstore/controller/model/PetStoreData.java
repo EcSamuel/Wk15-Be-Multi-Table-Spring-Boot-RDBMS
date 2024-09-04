@@ -16,6 +16,10 @@ public class PetStoreData {
     private Long petStoreId;
     private String storeName;
     private String storeAddress;
+    private String storePhone;
+    private String storeCity;
+    private String storeState;
+    private String storeZip;
     private Set<PetStoreCustomer> customers = new HashSet<>();
     private Set<PetStoreEmployee> employees = new HashSet<>();
 
@@ -23,6 +27,10 @@ public class PetStoreData {
         this.petStoreId = petStore.getId();
         this.storeName = petStore.getStoreName();
         this.storeAddress = petStore.getStoreAddress();
+        this.storePhone = petStore.getStorePhone();
+        this.storeCity = petStore.getStoreCity();
+        this.storeState = petStore.getStoreState();
+        this.storeZip = petStore.getStoreZip();
 //        this.customers = petStore.getCustomers().stream()
 //                .map(PetStoreCustomer::new)
 //                .collect(Collectors.toSet());

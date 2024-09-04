@@ -17,11 +17,19 @@ public class PetStore {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column// Instance variables reflecting table columns
     private String storeName;
     @Column
     private String storeAddress;
+    @Column
+    private String storePhone;
+    @Column
+    private String storeCity;
+    @Column
+    private String storeState;
+    @Column
+    private String storeZip;
+
 
     // Relationship with Customers
     @ManyToMany(cascade = CascadeType.PERSIST)
