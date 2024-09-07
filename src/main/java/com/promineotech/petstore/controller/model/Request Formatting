@@ -1,0 +1,47 @@
+POST http://localhost:8080/pet_store
+Content-Type: application/json
+
+{
+  "storeName": "New Pet Store",
+  "storeAddress": "123 Test St",
+  "storePhone": "55555555",
+  "storeCity": "Ozark",
+  "storeState": "Missouri",
+  "storeZip": "65721"
+}
+
+PUT http://localhost:8080/pet_store/1
+Content-Type: application/json
+
+{
+  "storeName": "Updated Name",
+  "storeAddress": "158 Park Place",
+  "storePhone": "4175815427",
+  "storeCity": "Ozark",
+  "storeState": "Missouri",
+  "storeZip": "65721",
+  "customers": [],
+  "employees": []
+}
+
+GET http://localhost:8080/pet_store
+Content-Type: application/json
+
+POST http://localhost:8080/pet_store/1/employee
+Content-Type: application/json
+
+{
+  "employeeName": "Rick James",
+  "employeeRole": "Hype Man"
+}
+
+DELETE http://localhost:8080/pet_store/1
+Content-Type: application/json
+
+POST http://localhost:8080/pet_store/2/customers
+Content-Type: application/json
+
+{
+  "customerEmail": "newtestemail@email.com",
+  "customerName": "Ol Dirty Badword"
+}

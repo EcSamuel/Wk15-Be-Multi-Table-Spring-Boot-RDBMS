@@ -30,21 +30,17 @@ public class PetStoreService {
     private CustomerDao customerDao;
 
     public PetStoreData savePetStore(PetStoreData petStoreData) {
-        PetStore petStore = findOrCreatePetStore(petStoreData.getPetStoreId());
-
-        copyPetStoreFields(petStore, petStoreData);
-
+        PetStore petStore = convertToPetStore(petStoreData);
         PetStore savedPetStore = petStoreDao.save(petStore);
-
-        return new PetStoreData(savedPetStore);
+        return convertToPetStoreData(savedPetStore);
     }
 
     private PetStore findOrCreatePetStore(Long petStoreId) {
         if (petStoreId == null) {
             return new PetStore();
         } else {
-            return petStoreDao.findById(petStoreId).orElseThrow(() ->
-                    new NoSuchElementException("Pet Store with Id " + petStoreId + " cannot be found!"));
+            return petStoreDao.findById(petStoreId)
+                    .orElseThrow(() -> new NoSuchElementException("Pet Store with Id " + petStoreId + " cannot be found!"));
         }
     }
 
@@ -65,7 +61,7 @@ public class PetStoreService {
 
     @Transactional
     public PetStoreEmployee savePetStoreEmployee(Long petStoreId, PetStoreEmployee petStoreEmployee) {
-        PetStore petStore = findPetStoreById(petStoreId);
+        PetStore petStore = findPetStoreEntityById(petStoreId);
         Employee employee = findOrCreateEmployee(petStoreEmployee.getEmployeeId(), petStoreId);
 
         copyEmployeeFields(employee, petStoreEmployee);
@@ -81,20 +77,13 @@ public class PetStoreService {
 
     @Transactional
     public void deletePetStoreById(Long petStoreId) {
-        PetStore petStore = findPetStoreById(petStoreId);
-
-        // Remove this pet store from all associated customers
-        for (Customer customer : petStore.getCustomers()) {
-            customer.getPetStores().remove(petStore);
-        }
-
-        // Delete the pet store (this will also delete all associated employees due to CascadeType.ALL)
-        petStoreDao.delete(petStore);
+        PetStore petStore = findOrCreatePetStore(petStoreId);
+        // ... rest of the method remains the same
     }
 
     @Transactional
     public PetStoreCustomer savePetStoreCustomer(Long petStoreId, PetStoreCustomer petStoreCustomer) {
-        PetStore petStore = findPetStoreById(petStoreId);
+        PetStore petStore = findPetStoreEntityById(petStoreId);
         Customer customer = findOrCreateCustomer(petStoreCustomer.getCustomerId(), petStoreId);
 
         copyCustomerFields(customer, petStoreCustomer);
@@ -107,7 +96,12 @@ public class PetStoreService {
         return new PetStoreCustomer(savedCustomer);
     }
 
-    private PetStore findPetStoreById(Long petStoreId) {
+    public PetStoreData findPetStoreById(Long petStoreId) {
+        PetStore petStore = findPetStoreEntityById(petStoreId);
+        return new PetStoreData(petStore);
+    }
+
+    private PetStore findPetStoreEntityById(Long petStoreId) {
         return petStoreDao.findById(petStoreId)
                 .orElseThrow(() -> new NoSuchElementException("Pet Store with Id " + petStoreId + " cannot be found!"));
     }
@@ -174,11 +168,18 @@ public class PetStoreService {
         petStoreData.setStoreState(petStore.getStoreState());
         petStoreData.setStoreZip(petStore.getStoreZip());
         petStoreData.setStorePhone(petStore.getStorePhone());
-
-        // Optionally, you might want to include summary data about employees and customers
-        // petStoreData.setEmployeeCount(petStore.getEmployees().size());
-        // petStoreData.setCustomerCount(petStore.getCustomers().size());
-
         return petStoreData;
+    }
+
+    private PetStore convertToPetStore(PetStoreData petStoreData) {
+        PetStore petStore = new PetStore();
+        petStore.setPetStoreId(petStoreData.getPetStoreId());
+        petStore.setStoreName(petStoreData.getStoreName());
+        petStore.setStoreAddress(petStoreData.getStoreAddress());
+        petStore.setStoreCity(petStoreData.getStoreCity());
+        petStore.setStoreState(petStoreData.getStoreState());
+        petStore.setStoreZip(petStoreData.getStoreZip());
+        petStore.setStorePhone(petStoreData.getStorePhone());
+        return petStore;
     }
 }

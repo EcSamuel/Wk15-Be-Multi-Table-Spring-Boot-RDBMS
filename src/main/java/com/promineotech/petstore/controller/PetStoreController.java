@@ -1,16 +1,20 @@
 package com.promineotech.petstore.controller;
 
+import com.promineotech.petstore.controller.model.PetStoreCustomer;
 import com.promineotech.petstore.controller.model.PetStoreData;
 import com.promineotech.petstore.controller.model.PetStoreEmployee;
+import com.promineotech.petstore.entity.PetStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.promineotech.petstore.service.PetStoreService;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/pet_store")
@@ -27,6 +31,14 @@ public class PetStoreController {
         return petStoreService.savePetStore(petStoreData);
     }
 
+    @PostMapping("/{petStoreId}/customers")
+    @ResponseStatus(HttpStatus.CREATED)
+    public PetStoreCustomer addCustomerToPetStore(
+            @PathVariable Long petStoreId,
+            @RequestBody PetStoreCustomer petStoreCustomer) {
+        return petStoreService.savePetStoreCustomer(petStoreId, petStoreCustomer);
+    }
+
     @PutMapping("/{petStoreId}")
     public PetStoreData updatePetStore(@PathVariable Long petStoreId, @RequestBody PetStoreData petStoreData) {
         log.info("Updating pet store with ID: {}", petStoreId);
@@ -39,6 +51,17 @@ public class PetStoreController {
     public List<PetStoreData> getAllPetStores() {
         log.info("Received request to get pet stores.");
         return petStoreService.getAllPetStores();
+    }
+
+    @GetMapping("/{petStoreId}")
+    public ResponseEntity<PetStoreData> getPetStoreById(@PathVariable Long petStoreId) {
+        log.info("Received request to get pet store with ID: {}", petStoreId);
+        try {
+            PetStoreData petStoreData = petStoreService.findPetStoreById(petStoreId);
+            return ResponseEntity.ok(petStoreData);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @PostMapping("/{petStoreId}/employee")
