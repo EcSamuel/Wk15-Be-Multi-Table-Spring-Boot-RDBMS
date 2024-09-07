@@ -13,10 +13,9 @@ import java.util.Set;
 @Data // Lombok annotation for getters, setters, toString, etc.
 public class PetStore {
 
-    // Define the primary key with auto-generated value
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long petStoreId;
     @Column// Instance variables reflecting table columns
     private String storeName;
     @Column
@@ -29,7 +28,6 @@ public class PetStore {
     private String storeState;
     @Column
     private String storeZip;
-
 
     // Relationship with Customers
     @ManyToMany(cascade = CascadeType.PERSIST)

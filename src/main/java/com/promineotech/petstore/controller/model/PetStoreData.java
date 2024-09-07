@@ -24,7 +24,7 @@ public class PetStoreData {
     private Set<PetStoreEmployee> employees = new HashSet<>();
 
     public PetStoreData(PetStore petStore) {
-        this.petStoreId = petStore.getId();
+        this.petStoreId = petStore.getPetStoreId();
         this.storeName = petStore.getStoreName();
         this.storeAddress = petStore.getStoreAddress();
         this.storePhone = petStore.getStorePhone();
@@ -43,34 +43,6 @@ public class PetStoreData {
 
         for (Employee employee : petStore.getEmployees()) {
             employees.add(new PetStoreEmployee(employee));
-        }
-    }
-
-    @Data
-    @NoArgsConstructor
-    public static class PetStoreCustomer {
-        private Long customerId;
-        private String customerEmail;
-        private String customerName;
-
-        public PetStoreCustomer(Customer customer) {
-            this.customerId = customer.getId();
-            this.customerEmail = customer.getCustomerEmail();
-            this.customerName = customer.getCustomerName();
-        }
-    }
-
-    @Data
-    @NoArgsConstructor
-    public static class PetStoreEmployee {
-        private Long employeeId;
-        private String employeeName;
-        private String employeeRole;
-
-        public PetStoreEmployee(Employee employee) {
-            this.employeeId = employee.getId();
-            this.employeeName = employee.getEmployeeName();
-            this.employeeRole = employee.getEmployeeRole();
         }
     }
 }
